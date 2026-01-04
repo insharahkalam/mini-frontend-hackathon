@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "myFont";
+    src: url(./fonts/Valty\ DEMO.otf);
+}
+
+body{
+font-family: "myFont";
+}
