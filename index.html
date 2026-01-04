@@ -1,10 +1,16 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>signup</title>
+    <title>login</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
@@ -13,186 +19,52 @@
 
 </head>
 
-<body>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-900 to-black text-white">
+
+    <div class="w-full max-w-md bg-slate-900/90 rounded-xl shadow-2xl p-7">
+        <h2 class="text-center text-xl font-semibold mb-6">Login to your Account</h2>
 
 
+        <!-- Email -->
+        <label class="text-sm text-slate-300">Email</label>
+        <input type="email" id="loginEmail" placeholder="john@company.com"
+            class="w-full mt-1 mb-4 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-slate-500">
 
-    <header class="bg-gray-900">
-        <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-            <div class="flex lg:flex-1">
-                <a href="#" class="-m-1.5 p-1.5">
-                    <span class="sr-only">Your Company</span>
-                    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt=""
-                        class="h-8 w-auto" />
-                </a>
-            </div>
-            <div class="flex lg:hidden">
-                <button type="button" command="show-modal" commandfor="mobile-menu"
-                    class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400">
-                    <span class="sr-only">Open main menu</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon"
-                        aria-hidden="true" class="size-6">
-                        <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
-            <el-popover-group class="hidden lg:flex lg:gap-x-12">
-                <div class="relative">
-                    <button popovertarget="desktop-menu-product"
-                        class="flex items-center gap-x-1 text-sm/6 font-semibold text-white">
-                        Product
+        <!-- Password -->
+        <label class="text-sm text-slate-300">Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••"
+            class="w-full mt-1 mb-4 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-slate-500">
 
-                    </button>
-
-
-                </div>
-
-                <a href="#" class="text-sm/6 font-semibold text-white">Features</a>
-                <a href="#" class="text-sm/6 font-semibold text-white">Marketplace</a>
-                <a href="#" class="text-sm/6 font-semibold text-white">Company</a>
-            </el-popover-group>
-            <div class="hidden lg:flex lg:flex-1 gap-3 lg:justify-end">
-                <a href="login.html"
-                    class="text-sm/6 font-semibold border px-6 py-2 rounded-xl hover:bg-gray-800 text-white">Log in </a>
-                <button type="button" id="logout"
-                    class="text-sm/6 font-semibold border px-6 py-2 rounded-xl hover:bg-gray-800 text-white">Logout
-                </button>
-            </div>
-        </nav>
-  
-            <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
-                <div tabindex="0" class="fixed inset-0 focus:outline-none">
-                    <el-dialog-panel
-                        class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10">
-                        <div class="flex items-center justify-between">
-                            <a href="#" class="-m-1.5 p-1.5">
-                                <span class="sr-only">Your Company</span>
-                                <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                                    alt="" class="h-8 w-auto" />
-                            </a>
-                            <button type="button" command="close" commandfor="mobile-menu"
-                                class="-m-2.5 rounded-md p-2.5 text-gray-400">
-                                <span class="sr-only">Close menu</span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    data-slot="icon" aria-hidden="true" class="size-6">
-                                    <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="mt-6 flow-root">
-                            <div class="-my-6 divide-y divide-white/10">
-                                <div class="space-y-2 py-6">
-                                    <div class="-mx-3">
-                                        <button type="button" command="--toggle" commandfor="products"
-                                            class="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-white hover:bg-white/5">
-                                            Product
-
-                                        </button>
-                                        <el-disclosure id="products" hidden class="mt-2 block space-y-2">
-                                            <a href="#"
-                                                class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5">Analytics</a>
-                                            <a href="#"
-                                                class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5">Engagement</a>
-                                            <a href="#"
-                                                class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5">Security</a>
-                                            <a href="#"
-                                                class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5">Integrations</a>
-                                            <a href="#"
-                                                class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5">Automations</a>
-                                            <a href="#"
-                                                class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5">Watch
-                                                demo</a>
-                                            <a href="#"
-                                                class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5">Contact
-                                                sales</a>
-                                        </el-disclosure>
-                                    </div>
-                                    <a href="#"
-                                        class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5">Features</a>
-                                    <a href="#"
-                                        class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5">Marketplace</a>
-                                    <a href="#"
-                                        class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5">Company</a>
-                                </div>
-                                <div class="py-6 flex gap-3">
-                                    <a href="login.html"
-                                        class="-mx-3 block rounded-lg px-3 py-2.5 border px-6 py-2 rounded-2xl text-base/7 font-semibold text-white hover:bg-white/5">Log
-                                        in</a>
-                                    <button type="button" id="mobilelogout"
-                                        class="mx-3 block rounded-lg px-3 py-2.5 border px-6 py-2 rounded-2xl text-base/7 font-semibold text-white hover:bg-white/5">Logout
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </el-dialog-panel>
-                </div>
-            </dialog>
-    
-    </header>
-
-
-
-
-
-
-    <footer class="bg-gray-900 border-t border-gray-700 text-slate-300">
-        <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-
-            <!-- Brand -->
-            <div>
-                <a href="#" class="-m-1.5 p-1.5">
-                    <span class="sr-only">Your Company</span>
-                    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt=""
-                        class="h-8 w-auto" />
-                </a>
-                <p class="mt-4 text-sm leading-relaxed">
-                    Creating clean, modern and scalable digital experiences for web and mobile.
-                </p>
-            </div>
-
-            <!-- Navigation -->
-            <div>
-                <h3 class="text-white font-medium mb-4">Navigation</h3>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-indigo-400 transition">Home</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition">About</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition">Services</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition">Contact</a></li>
-                </ul>
-            </div>
-
-            <!-- Resources -->
-            <div>
-                <h3 class="text-white font-medium mb-4">Resources</h3>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-indigo-400 transition">Documentation</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition">Terms of Service</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition">Support</a></li>
-                </ul>
-            </div>
-
-            <!-- Contact -->
-            <div>
-                <h3 class="text-white font-medium mb-4">Contact</h3>
-                <p class="text-sm">Email: support@yourdomain.com</p>
-                <p class="text-sm mt-2">Location: Worldwide</p>
-
-                <!-- Social -->
-                <div class="flex gap-4 mt-4">
-                    <a href="#" class="hover:text-indigo-400 transition">LinkedIn</a>
-                    <a href="#" class="hover:text-indigo-400 transition">GitHub</a>
-                    <a href="#" class="hover:text-indigo-400 transition">Twitter</a>
-                </div>
-            </div>
+        <!-- Divider -->
+        <div class="flex items-center gap-3 text-slate-400 text-xs mb-5">
+            <span class="flex-1 h-px bg-slate-700"></span>
+            or
+            <span class="flex-1 h-px bg-slate-700"></span>
         </div>
 
-        <!-- Bottom -->
-        <div class="border-t border-slate-800 text-center py-5 text-sm">
-            © 2026 YourBrand. All rights reserved.
+        <!-- Social Buttons -->
+        <div class="flex gap-3 mb-5">
+            <button
+                class="flex-1 border border-slate-700 bg-slate-800 hover:bg-slate-700 transition rounded-lg py-3 text-sm"><i
+                    class="fa-brands fa-google"></i> Login
+                with Google</button>
+            <button
+                class="flex-1 border border-slate-700 bg-slate-800 hover:bg-slate-700 transition rounded-lg py-3 text-sm"><i
+                    class="fa-brands fa-apple"></i> Login
+                with Apple</button>
         </div>
-    </footer>
+
+        <!-- Button -->
+        <button id="loginBtn"
+            class="w-full bg-blue-600 hover:bg-blue-700 transition py-2.5 rounded-lg font-medium">Login
+        </button>
+
+        <!-- Footer -->
+        <p class="text-center text-xs text-slate-400 mt-4">Don't have an account?
+            <a href="signup.html" class="text-blue-500 hover:underline">Sign up </a>
+        </p>
+
+    </div>
 
 
 
@@ -202,3 +74,6 @@
 </body>
 
 </html>
+
+
+
