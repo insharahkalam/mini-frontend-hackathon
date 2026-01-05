@@ -150,7 +150,7 @@ async function showProfileImg() {
         fetchData.forEach(img => {
             showImg.innerHTML += `
         <div class="flex items-center gap-2">
-          <span class="text-white font-bold">${img.email}</span>
+          <span class="text-white font-bold">${img.name}</span>
           <img src="${img.profile_img}"
                class="rounded-full"
                style="width:45px;height:45px;box-shadow:0 0 10px white"
@@ -218,7 +218,7 @@ loginBtn && loginBtn.addEventListener("click", async (e) => {
         return;
     }
 
-   
+
 
     // ✅ success + redirect
     Swal.fire({
@@ -229,7 +229,7 @@ loginBtn && loginBtn.addEventListener("click", async (e) => {
         showConfirmButton: false
     });
 
-   
+
 
     setTimeout(() => {
         window.location.href = "home.html"
@@ -293,7 +293,7 @@ logout && logout.addEventListener("click", async () => {
 const mobilelogout = document.getElementById("mobilelogout");
 
 mobilelogout && mobilelogout.addEventListener("click", async () => {
-    window.location.href = "login.html"
+    window.location.href = "index.html"
 })
 
 
@@ -387,7 +387,6 @@ const allPost = document.getElementById("allPost")
 
 if (allPost) {
 
-
     const { data, error } = await client
         .from('user-posts')
         .select("*")
@@ -399,27 +398,25 @@ if (allPost) {
         data.forEach((post) => {
             console.log(post);
             allPost.innerHTML += `
-  <!-- Card -->
-  <div class="group w-[350px]  bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300">
+
+ <div class=" w-[350px] hover:scale-102 bg-black rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300">
 
     <!-- Image -->
     <div class="overflow-hidden">
       <img
         src="${post.post_pic}"
         alt="post image"
-        class="w-full h-[300px] object-cover group-hover:scale-105 transition duration-300"
+        class="w-full p-4 h-[280px] rounded-[40px] object-cover transition duration-300"
       />
     </div>
 
-    <!-- Content -->
-    <div class="p-5">
 
-      <!-- Title -->
-      <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-1">
+ <div class="px-5 pb-5">
+      <h2 class="text-xl font-semibold text-white mb-1 line-clamp-1">
         ${post.title}
-      </h3>
+      </h2>
 
- <p class="text-xs text-gray-600 mb-4"> By ${post.name}
+ <p class="text-xs text-white tracking-wider mb-1"> By ${post.name}
   ${new Date(post.created_at).toLocaleDateString("en-US", {
                 month: "short",
                 day: "2-digit",
@@ -427,7 +424,7 @@ if (allPost) {
             })}
 </p>
       <!-- Description -->
-      <p class="text-md text-gray-600 line-clamp-3 mb-4">
+      <p class="text-sm text-white line-clamp-3 mb-4">
         ${post.description}
       </p>
 
@@ -435,15 +432,14 @@ if (allPost) {
    
 <button
     onClick="window.location.href='detail.html?id=${post.id}'"
-    class="w-full py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
-    Read More
+    class="w-full py-3 text-xl font-medium flex items-center gap-2 justify-center text-white bg-blue-500  rounded-full hover:bg-black hover:text-white hover:border border-white transition-animation duration-300">
+    Read More <i class="fa-solid fa-arrow-right-long fa-xs"></i>
 </button>
 
 
     </div>
   </div>
 `
-
         })
     }
 }
@@ -451,10 +447,12 @@ if (allPost) {
 
 async function fetchMyPosts() {
     const myPost = document.getElementById("myPost")
+    const userName = document.getElementById("username")
 
     const { data: getUserData, error: getErr } = await client.auth.getUser()
 
     let userID = getUserData.user.id
+    userName.textContent = getUserData.user.user_metadata.username
 
     const { data: postData, error: postErr } = await client
         .from('user-posts')
@@ -469,39 +467,37 @@ async function fetchMyPosts() {
         postData.forEach(post => {
             myPost.innerHTML += `
      
-  <div id="post-${post.id}"  class="group w-[350px]  bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300">
+  <div id="post-${post.id}"  class=" w-[350px] hover:scale-102 bg-black rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300">
 
     <div class="overflow-hidden">
       <img
         src="${post.post_pic}"
         alt="post image"
-        class="w-full  h-[300px] object-cover group-hover:scale-105 transition duration-300"
+        class="w-full p-4 h-[280px] rounded-[40px] object-cover transition duration-300"
       />
     </div>
 
    
-    <div class="p-5">
-
-  
-      <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-1">
+    <div class="px-5 pb-5">
+      <h2 class="text-2xl font-semibold text-white mb-2 line-clamp-1">
         ${post.title}
-      </h3>
+      </h2>
 
     
-      <p class="text-sm text-gray-600 line-clamp-3 mb-4">
+      <p class="text-md text-white line-clamp-2 mb-4">
         ${post.description}
       </p>
 
  
-     <div class="flex flex-col gap-3">
+     <div class="flex gap-3">
       <button onClick="editBtn(${post.id} , '${post.title}' , '${post.description}' )"
-        class="w-full py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
-       Edit
+        class="w-full py-3 text-2xl flex items-center justify-center gap-2 font-medium text-white bg-green-600 rounded-full hover:bg-black hover:text-white hover:border border-white transition-animation duration-300">
+       Edit <i class="fa-solid fa-pen-to-square fa-xs"></i>
       </button>
 
       <button onClick="deleteBtn(${post.id})"
-        class="w-full py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
-     Delete
+        class="w-full py-3 text-2xl flex items-center justify-center gap-2 font-medium text-white bg-red-600 rounded-full hover:bg-black hover:text-white hover:border border-white transition-animation duration-300"">
+     Delete <i class="fa-regular fa-trash-can fa-xs"></i>
       </button>
       </div>
 
@@ -655,7 +651,6 @@ window.editBtn = async function (id, title, description) {
 }
 
 
-
 // =========DETAIL=====
 
 const params = new URLSearchParams(window.location.search)
@@ -663,26 +658,24 @@ const productId = params.get("id")
 let currentProduct = null
 console.log(productId);
 
-
-
 if (productId) {
     const { data: post, error } = await client
         .from('user-posts')
         .select("*")
         .eq('id', productId)
-        .single(); // single ensures only one record
+        .single();
 
     if (error) {
         console.error(error);
     } else {
-        // show post
-const container = document.getElementById("postDetailContainer");
 
-container.innerHTML = `
-  <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden p-6">
+        const container = document.getElementById("postDetailContainer");
+
+        container.innerHTML = `
+  <div class="max-w-2xl mx-auto bg-black rounded-4xl hover:scale-102 transition-animation duration-500 shadow-lg overflow-hidden p-6">
 
     <!-- Image -->
-    <div class="w-full h-80 overflow-hidden rounded-xl mb-4">
+    <div class="w-full h-80 overflow-hidden rounded-3xl mb-4">
       <img 
         src="${post.post_pic}" 
         alt="${post.title}" 
@@ -692,19 +685,19 @@ container.innerHTML = `
 
     <!-- Content -->
     <div class="px-2">
-      <p class="text-sm text-gray-500 mb-2">
+      <p class="text-xs text-white mb-2">
         ${new Date(post.created_at).toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric"
+            month: "short",
+            day: "numeric",
+            year: "numeric"
         })}
       </p>
 
-      <h1 class="text-2xl font-bold text-gray-900 mb-3">
+      <h1 class="text-2xl font-bold text-white mb-3">
         ${post.title}
       </h1>
 
-      <p class="text-gray-700 text-base leading-relaxed">
+      <p class= text-white text-sm leading-relaxed">
         ${post.description}
       </p>
 
@@ -712,7 +705,7 @@ container.innerHTML = `
       <div class="mt-6">
         <button 
           onclick="window.location.href='allPost.html'"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium transition"
+          class="bg-white hover:bg-black hover:text-white hover:border border-white text-black px-10 py-4 rounded-full font-medium transition-animation duration-300 text-xl tracking-wide"
         >
           Back to Posts
         </button>
