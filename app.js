@@ -376,12 +376,19 @@ postBtn && postBtn.addEventListener("click", async (e) => {
     }
 })
 
+// =========NAME SHOW======
 
+try {
+    const userName = document.getElementById("username")
+    const { data: getUserData, error: getErr } = await client.auth.getUser()
 
+    userName.textContent = getUserData.user.user_metadata.username
 
+} catch (error) {
+    console.log(error);
+
+}
 // =======ALL POST======
-
-
 
 const allPost = document.getElementById("allPost")
 
@@ -447,12 +454,11 @@ if (allPost) {
 
 async function fetchMyPosts() {
     const myPost = document.getElementById("myPost")
-    const userName = document.getElementById("username")
 
     const { data: getUserData, error: getErr } = await client.auth.getUser()
 
     let userID = getUserData.user.id
-    userName.textContent = getUserData.user.user_metadata.username
+
 
     const { data: postData, error: postErr } = await client
         .from('user-posts')
