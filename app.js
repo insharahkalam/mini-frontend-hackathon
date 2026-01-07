@@ -8,7 +8,6 @@ console.log(createClient);
 console.log(client);
 
 
-
 // =====signup work=========
 
 const password = document.getElementById("password");
